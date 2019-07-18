@@ -8,3 +8,27 @@
 	width: 32px;
 	height: 32px;
 }
+.perso > div {
+	/* border: 1px solid #990; */
+	background-color: #ffed;
+	border-radius: 1em 1em 1em 0;
+	position: absolute;
+	left:50%;
+	bottom: 100%;
+	font-family: cursive;
+	font-size: 10px;
+	padding: .25em;
+	width: 20ch;
+	box-shadow: .1em .1em .3em rgba(0,0,0,.5);
+	transform: scale(1);
+	transition-duration: .5s;
+	transform-origin: left bottom;
+	/* transition-property: opacity; */
+}
+.perso:hover {
+	z-index: 100;
+}
+.perso:not(:hover) > div {
+	opacity:0;
+	transform: scale(0);
+}
