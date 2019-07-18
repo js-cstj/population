@@ -1,12 +1,13 @@
-# application-base
-Application de base pour débuter un projet
+# Démo Population
+Initiation aux événements
 
 ## Description
 Description à venir
 
-## Particularités
+## Étapes
 
-- Compléter
+1. Récupérer la branche de départ
+   1. Faire afficher des tas de personnages aléatoires.
 
 ## Variantes et ajouts possibles
 
