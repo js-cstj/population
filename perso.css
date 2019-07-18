@@ -1,3 +1,12 @@
+#interface > header,
+#interface > footer {
+	background-color: hsl(271, 50%, 20%);
+	color:white;
+}
+#app {
+	background-color: hsl(120, 30%, 40%);
+	background-image: url(images/texture_gazon.png);
+}
 .perso {
 	display: block;
 	position: absolute;
