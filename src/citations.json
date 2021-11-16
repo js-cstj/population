@@ -1,6 +1,5 @@
-/*jslint esnext:true */
-/*Les citations proviennent du site https://www.intoxitation.com/ */
-var citations = [
+[
+	"Les citations proviennent du site https://www.intoxitation.com/",
 	"Compter constamment sur les autres quand on est dans la merde, c’est un peu les prendre pour du PQ.",
 	"On reconnaît l'âne à ses oreilles, l'ours à ses griffes l'imbécile à ses discours.",
 	"Je vous raconterais bien une connerie mais vraiment il y en a plein les journaux.",
@@ -189,6 +188,5 @@ var citations = [
 	"Donnez-moi un bain sans eau, je n'ai pas le temps de me sécher.",
 	"Celui qui parle de moi par-derrière fait honneur à mon derrière !",
 	"Quand le réveil sonna, je su qu'il était cette heure ennemie.",
-	"Les hommes c'est comme la neige, on ne sait jamais combien de centimètre on aura ni combien de temps ca tiendra.",
-];
-export default citations;
+	"Les hommes c'est comme la neige, on ne sait jamais combien de centimètre on aura ni combien de temps ca tiendra."
+]

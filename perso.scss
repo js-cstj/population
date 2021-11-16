@@ -1,0 +1,52 @@
+body {
+	overflow: hidden;
+}
+#interface {
+	header,
+	footer {
+		background-color: hsl(271, 50%, 20%);
+		color:white;
+	}
+}
+#app {
+	background-color: hsl(120, 30%, 40%);
+	background-image: url(images/texture_gazon.png);
+}
+.perso {
+	--taille: 64px;
+	display: block;
+	position: absolute;
+	font-size: var(--taille);
+	left: 0;
+	top: 0;
+	margin-left: -.5em;
+	margin-top: -.5em;
+	width: 1em;
+	height: 1em;
+	background-size: 4em 2em;
+	div.bulle {
+		// border: 1px solid #990;
+		font-size: .3em;
+		background-color: #ffed;
+		border-radius: 1em 1em 1em 0;
+		position: absolute;
+		left:50%;
+		bottom: 100%;
+		font-family: cursive;
+		//font-size: 10px;
+		padding: .25em;
+		width: 20ch;
+		box-shadow: .1em .1em .3em rgba(0,0,0,.5);
+		transform: scale(1);
+		transition-duration: .5s;
+		transform-origin: left bottom;
+		/* transition-property: opacity; */
+	}
+	&:hover {
+		z-index: 100;
+	}
+	&:not(:hover) > div {
+		opacity:0;
+		transform: scale(0);
+	}
+}
