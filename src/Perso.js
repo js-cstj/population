@@ -1,17 +1,36 @@
 import App from "./App.js";
 export default class Perso {
-    constructor(id, x = 0, y = 0, direction = null) {
+    constructor(id, x = 0, y = 0, angle = null, vitesse = null) {
+        this.fuite = false;
         this.id = id;
         if (this.id === null) {
             this.id = App.piger(Perso.persos);
         }
-        this.direction = direction;
-        if (this.direction === null) {
-            this.direction = Math.floor(Math.random() * 4);
+        this.angle = angle;
+        if (this.angle === null) {
+            this.angle = Math.floor(Math.random() * 360);
+        }
+        this.vitesse = vitesse;
+        if (this.vitesse === null) {
+            this.vitesse = Math.floor(Math.random() * 10 + 10);
         }
         this.x = x;
         this.y = y;
         this.dom = null;
+    }
+    get direction() {
+        if (this.angle < 45 || this.angle >= 315) {
+            return 1;
+        }
+        if (this.angle >= 45 && this.angle < 135) {
+            return 2;
+        }
+        if (this.angle >= 135 && this.angle < 225) {
+            return 3;
+        }
+        if (this.angle >= 225 && this.angle < 315) {
+            return 0;
+        }
     }
     get html() {
         if (this.dom) {
@@ -23,30 +42,63 @@ export default class Perso {
 		perso.style.top = this.y + "px";
 		perso.style.backgroundImage = "url(images/last-guardian-sprites/" + this.id + ".png)";
         perso.style.backgroundPositionX = this.direction * -1 + "em";
-		//perso.style.backgroundPositionY = Math.floor(Math.random() * 2) * -1 + "em";
 		var citation = App.piger(App.citations);
 		perso.appendChild(this.html_bulle(citation));
         perso.obj = this;
         this.dom = perso;
-        var directions = [{x:0, y:-5},{x:5, y:0},{x:0, y:5},{x:-5, y:0}];
         this.timeoutDirection = 0;
         window.setInterval(() => {
-            if (perso.style.backgroundPositionY === "0em") {
-                perso.style.backgroundPositionY = "-1em";
-            } else {
-                perso.style.backgroundPositionY = "0em";
+            if (this.fuite) {
+                this.angle = ((Math.atan2(this.y - App.souris.y, this.x - App.souris.x)/Math.PI*180)+360)%360;
             }
-            this.x += directions[this.direction].x;
-            this.y += directions[this.direction].y;
-            perso.style.left = this.x + "px";
-            perso.style.top = this.y + "px";
+            if (this.attrait) {
+                this.angle = ((Math.atan2(App.souris.y - this.y, App.souris.x - this.x)/Math.PI*180)+360)%360;
+            }
+            this.deplacer();
             if (new Date().getTime() > this.timeoutDirection) {
-                this.direction = Math.floor(Math.random() * 4);
-                perso.style.backgroundPositionX = this.direction * -1 + "em";
+                this.angle = Math.floor(Math.random() * 360);
                 this.timeoutDirection = new Date().getTime() + Math.floor(Math.random() * 2000);
             }
-        }, Math.floor(Math.random() * 200) + 100);
+        }, 200);
+        perso.addEventListener("mousemove", e => {
+            if (e.ctrlKey) {
+                this.fuire();
+            }
+            if (e.altKey) {
+                this.attirer();
+            }
+        });
 		return perso;
+    }
+    fuire() {
+        this.fuite = true;
+        this.attrait = false;
+        this.dom.style.boxShadow = "0 0 1em rgba(255,255,0,.5)"
+        window.setTimeout(() => {
+            this.fuite = false;
+            this.dom.style.removeProperty("box-shadow");
+        }, Math.floor(Math.random() *5000)+3000);
+    }
+    attirer() {
+        this.fuite = false;
+        this.attrait = true;
+        this.dom.style.boxShadow = "0 0 1em rgba(255,0,0,.5)"
+        window.setTimeout(() => {
+            this.attrait = false;
+            this.dom.style.removeProperty("box-shadow");
+        }, Math.floor(Math.random() *5000)+3000);
+    }
+    deplacer() {
+        if (this.dom.style.backgroundPositionY === "0em") {
+            this.dom.style.backgroundPositionY = "-1em";
+        } else {
+            this.dom.style.backgroundPositionY = "0em";
+        }
+        this.dom.style.backgroundPositionX = this.direction * -1 + "em";
+        this.x += Math.cos(this.angle * Math.PI / 180) * this.vitesse;
+        this.y += Math.sin(this.angle * Math.PI / 180) * this.vitesse;
+        this.dom.style.left = this.x + "px";
+        this.dom.style.top = this.y + "px";   
     }
     html_bulle(citation) {
 		var bulle = document.createElement("div");

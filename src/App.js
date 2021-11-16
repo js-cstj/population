@@ -16,12 +16,33 @@ export default class App {
 				if (e.timeStamp < this.timeout) {
 					return;
 				}
-				if (e.buttons === 1 || e.shiftKey === true) {
+				if (e.shiftKey === true) {
 					var perso = new Perso(null, e.clientX, e.clientY);
 					app.appendChild(perso.html);
 					this.timeout = e.timeStamp + Math.random() * this.delaiAjout;
 				}
 			});
+		});
+		document.getElementById("app").addEventListener("mousemove", e => {
+			this.souris = e;
+		});
+		window.addEventListener("keydown", e => {
+			if (e.key === "p") {
+				var largeur = app.clientWidth;
+				var hauteur = app.clientHeight;
+				for (let i = 0; i < 100; i += 1) {
+					var perso = new Perso(null, Math.floor(Math.random() * largeur), Math.floor(Math.random() * hauteur));
+					app.appendChild(perso.html);
+				}
+			} else if (e.key === "f") {
+				app.querySelectorAll(".perso").forEach(perso => {
+					perso.obj.fuire();
+				});
+			} else if (e.key === "a") {
+				app.querySelectorAll(".perso").forEach(perso => {
+					perso.obj.attirer();
+				});
+			}
 		});
 	}
 	static chargerJson(url) {
