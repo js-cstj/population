@@ -44,6 +44,30 @@ export default class App {
 				});
 			}
 		});
+		app.appendChild(this.html_message());
+	}
+	static html_message() {
+		var resultat;
+		resultat = document.createElement("div");
+		resultat.classList.add("message");
+		var ul = resultat.appendChild(document.createElement("ul"));
+		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "SHIFT-déplacement : Ajouter une personnage";
+		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "ALT-toucher : Attrait personnage";
+		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "CTRL-toucher : Fuite personnage";
+		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "a : Attrait tous";
+		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "f : Fuite tous";
+		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "p : Populer (100 nouveaux personnages)";
+		document.body.addEventListener("click", function me(e) {
+			resultat.remove();
+			e.currentTarget.removeEventListener("click", me);
+		});
+		return resultat;
 	}
 	static chargerJson(url) {
 		return new Promise(resolve => {

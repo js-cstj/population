@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   overflow: hidden;
 }
@@ -56,5 +57,27 @@ body {
   opacity: 0;
   -webkit-transform: scale(0);
           transform: scale(0);
+}
+
+.message {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1em;
+  border-radius: 1em;
+  border: 1px solid black;
+  position: relative;
+}
+
+.message::before {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: .5em;
+  content: "✖";
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  border: 1px solid;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 100%;
+  text-align: center;
 }
 /*# sourceMappingURL=perso.css.map */

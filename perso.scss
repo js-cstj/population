@@ -50,3 +50,23 @@ body {
 		transform: scale(0);
 	}
 }
+.message {
+	background-color: rgba(255,255,255,.8);
+	padding: 1em;
+	border-radius: 1em;
+	border: 1px solid black;
+	position: relative;
+	&::before {
+		color: rgba(0,0,0,.5);
+		font-size: .5em;
+		content: "✖";
+		position: absolute;
+		right: 1em;
+		top: 1em;
+		border: 1px solid;
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		text-align: center;
+	}
+}
