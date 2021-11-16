@@ -42,6 +42,12 @@ export default class App {
 				app.querySelectorAll(".perso").forEach(perso => {
 					perso.obj.attirer();
 				});
+			} else if (e.key === "d") {
+				app.querySelectorAll(".perso").forEach(perso => {
+					window.setTimeout(() => {
+						perso.obj.detruire();
+					}, Math.floor(Math.random()*5000)+1000);
+				});
 			}
 		});
 		app.appendChild(this.html_message());
@@ -58,11 +64,15 @@ export default class App {
 		var li = ul.appendChild(document.createElement("li"));
 		li.innerHTML = "CTRL-toucher : Fuite personnage";
 		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "CTRL-ALT-toucher : Destruction personnage";
+		var li = ul.appendChild(document.createElement("li"));
 		li.innerHTML = "a : Attrait tous";
 		var li = ul.appendChild(document.createElement("li"));
 		li.innerHTML = "f : Fuite tous";
 		var li = ul.appendChild(document.createElement("li"));
 		li.innerHTML = "p : Populer (100 nouveaux personnages)";
+		var li = ul.appendChild(document.createElement("li"));
+		li.innerHTML = "d : Destruction tous";
 		document.body.addEventListener("click", function me(e) {
 			resultat.remove();
 			e.currentTarget.removeEventListener("click", me);

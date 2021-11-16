@@ -47,7 +47,7 @@ export default class Perso {
         perso.obj = this;
         this.dom = perso;
         this.timeoutDirection = 0;
-        window.setInterval(() => {
+        this.intervalDeplacement = window.setInterval(() => {
             if (this.fuite) {
                 this.angle = ((Math.atan2(this.y - App.souris.y, this.x - App.souris.x)/Math.PI*180)+360)%360;
             }
@@ -61,10 +61,11 @@ export default class Perso {
             }
         }, 200);
         perso.addEventListener("mousemove", e => {
-            if (e.ctrlKey) {
+            if (e.ctrlKey && e.altKey) {
+                this.detruire();
+            } else if (e.ctrlKey) {
                 this.fuire();
-            }
-            if (e.altKey) {
+            } else if (e.altKey) {
                 this.attirer();
             }
         });
@@ -87,6 +88,18 @@ export default class Perso {
             this.attrait = false;
             this.dom.style.removeProperty("box-shadow");
         }, Math.floor(Math.random() *5000)+3000);
+    }
+    detruire() {
+        this.dom.classList.add("detruire");
+        this.dom.style.animationDuration = Math.floor(Math.random() * 1000) + "ms";
+        this.dom.style.backgroundPositionX = "2em"
+        window.clearInterval(this.intervalDeplacement);
+        this.dom.addEventListener("animationend", e => {
+            if (e.animationName === "detruire") {
+                e.currentTarget.remove();
+            }
+        });
+
     }
     deplacer() {
         if (this.dom.style.backgroundPositionY === "0em") {
