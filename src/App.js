@@ -4,14 +4,14 @@ export default class App {
 	 */
 	static main() {
 		var app = document.getElementById("app");
+		// Commencer par le rite de passage avec la fonctions html_bulle puis la fonction html_perso
 		// Récupérer les données des citations
 		// Récupérer les données des personnages
 		// Placer tous les personnages sur la page avec une citation aléatoire
 		// Quand on clique sur le personnage, 
-		//     afficher une bulle avec la citation pendant une certain temps (3 secondes),
-		//     puis la cacher
+		//     afficher une bulle avec la citation
+		//     puis la cacher après un certain temps (3 secondes),
 		//     puis le personnage change de position.
-
 	}
 	
 	/**
@@ -42,6 +42,13 @@ export default class App {
 	 */
 	static html_Perso(nom, x, y) {
 	}
+	/**
+	 * Module qui retourne un élément représentant une bulle
+	 * en fonction du texte fourni
+	 * @static
+	 * @param {string} texte
+	 * @returns HTMLElement
+	 */
 	static html_bulle(texte) {
 	}
 }
